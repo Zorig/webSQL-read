@@ -1,0 +1,117 @@
+<style>
+  #Lname, button{
+    visibility: hidden;
+  }
+</style>
+<form id="add" method="post" onsubmit="return false;" >
+    <p>Save drafts to the database</p>
+    <label>First Name: </label><input type="text" id="Fname" name="student_id" autofocus/><br />
+    <input type="text" id="Lname" /><br />
+    <button id="add">Save as draft</button>
+</form>
+<div id="listholder">
+    <h3>Your saved drafts</h3>
+    <ul id="drafts">
+    </ul>
+</div>
+
+<script src="jquery-1.9.1.min.js"></script>
+<script>
+   $('#add button[type="submit"]').click(function(){
+        var val = $('#add input[name="student_id"]').val();
+        $('#add input[name="student_id"]').val('');
+        $('#add input[name="student_id"]').focus();
+        console.log(val)
+   });
+</script>
+<script>
+  if (window.openDatabase){
+    //Create the database the parameters are 1. the database name 2.version number 3. a description 4. the size of the database (in bytes) 1024 x 1024 = 1MB
+	var mydb = openDatabase("Testdb", "0.1", "Testing  Database", 1024 * 1024);
+
+	//create the  table using SQL for the database using a transaction
+	mydb.transaction(function(t){
+        t.executeSql("CREATE TABLE IF NOT EXISTS mydb (id INTEGER PRIMARY KEY, Fname VARCHAR(50), Lname VARCHAR(50))");
+    });
+
+}else{
+	alert("WebSQL is not supported by your browser!");
+}
+
+
+//function to output the list of cars in the database
+function updateDrafts(transaction, results){
+    //initialise the listitems variable
+    var listitems = "";
+    //get the list holder ul
+    var listholder = document.getElementById("drafts");
+    
+    //clear the list of drafts ul
+    listholder.innerHTML = "";
+    
+    var i;
+    //Iterate through the results
+    for (i = 0; i < results.rows.length; i++) {
+        //Get the current row from database
+        var row = results.rows.item(i);
+
+        listholder.innerHTML += "<li>" + row.Fname + " - " + row.Lname + "(<a href='javascript:void(0);' onclick='deleteDraft(" + row.id + ");'>Delete Draft</a>)";
+    }
+}
+
+//function to get the list of cars from the database
+
+function outputDrafts() {
+    //check to ensure the mydb object has been created
+    if (mydb) {
+        //Get all the cars from the database with a select statement, set outputCarList as the callback function for the executeSql command
+        mydb.transaction(function(t) {
+            t.executeSql("SELECT * FROM mydb", [], updateDrafts);
+        });
+    } else {
+        alert("db not found, your browser does not support web sql!");
+    }
+}
+//function to add the car to the database
+
+function addDraft() {
+    //check to ensure the mydb object has been created
+    if (mydb) {
+        //get the values of the make and model text inputs
+        var Fname= document.getElementById("Fname").value;
+        var Lname= document.getElementById("Lname").value;
+        Lname = new Date();
+
+        //Test to ensure that the user has entered both a make and model
+        if (Fname !== "" && Lname !== "") {
+            //Insert the user entered details into the cars table, note the use of the ? placeholder, these will replaced by the data passed in as an array as the second parameter
+            mydb.transaction(function(t) {
+                t.executeSql("INSERT INTO mydb (Fname, Lname) VALUES (?, ?)", [Fname, Lname]);
+                outputDrafts();
+                $('#Fname').val('');
+            });
+        } else {
+            alert("You must enter a make and model!");
+        }
+    } else {
+        alert("db not found, your browser does not support web sql!");
+    }
+}
+//function to remove a car from the database, passed the row id as it's only parameter
+
+function deleteDraft(id) {
+    //check to ensure the mydb object has been created
+    if (mydb) {
+        //Get all the cars from the database with a select statement, set outputCarList as the callback function for the executeSql command
+        mydb.transaction(function(t) {
+            t.executeSql("DELETE FROM mydb WHERE id=?", [id], outputDrafts);
+        });
+    } else {
+        alert("db not found, your browser does not support web sql!");
+    }
+}
+
+outputDrafts();
+$('#add').click(addDraft);
+
+</script>
