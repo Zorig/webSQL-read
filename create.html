@@ -81,6 +81,15 @@ function addDraft() {
         var Fname= document.getElementById("Fname").value;
         var Lname= document.getElementById("Lname").value;
         Lname = new Date();
+        var midDay = new Date();
+        midDay.setHours(12);
+        midDay.setMinutes(0);
+        midDay.setSeconds(0);
+        if (Lname > midDay ){
+          console.log('Garsan');
+        } else {
+          console.log('Orson');
+        };
 
         //Test to ensure that the user has entered both a make and model
         if (Fname !== "" && Lname !== "") {
