@@ -1,31 +1,60 @@
-{% extends 'base.html' %}
+{% extends 'foundation.html' %}
 {% block content %}
-  
-  <div class="container">  
-    <form id="add" method="post">
-      {% csrf_token %}
-      <p>Save drafts to the database</p>
-      <label>First Name: </label><input type="text" id="Fname" name="student_id" autofocus/><br />
-      <input type="text" id="Lname" /><br />
-      <button id="add">Save as draft</button>
-    </form>
-
-    <table class="table">
-      <caption>Оюутны бүртгэл.</caption>
-      <thead>
-        <tr>
-          <th>Цаг</th>
-          <th>Оюутны код</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for reg in registered_students %}
-        <tr>
-          <th scope="row">{{ reg.date }}</th>
-          <td>{{ reg.student_ID }}</td>
-        </tr>
-        {% endfor %}
-              </tbody>
-    </table>
+  <!--input form-->
+  <div class="row">
+    <div class="small-12 large-6 columns">
+      <!--card reader-->
+      <form method="post" action="">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="row">
+          <div class="small-12 large-12 columns">
+            <label>
+              <input type="text" placeholder="Сурагчын картын дугаар" name="student_id" autofocus /> {{ form.student_id.errors }}
+              <input type="time" id="time"> {{ form.time }}
+              <button class="button small" type="submit">+</button>
+            </label>
+          </div>
+        </div>
+      </form>
+      <!--//card reader-->
+    </div>
   </div>
-  {% endblock content %}
+  <!--//input form-->
+
+  <!--table with registration-->
+    <div class="row">
+      <table>
+        <thead>
+          <tr>
+           <th width="200"><i class="fa fa-barcode"></i>Сурагчын код</th>
+           <th>Цаг</th>
+           <th width="150">Үдээс өмнө</th>
+           <th width="150">Үдээс хойш</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for post in registered_students %}
+          <tr>
+            <td>{{ post.student_id }}</td>
+            <td>{{ post.time }}</td>
+            <td>
+              {% if post.take == True %}
+              <i class="fa fa-check"></i>
+              {% else %}
+              <i class="fa fa-barcode"></i>
+              {% endif %}
+            </td>
+            <td>
+              {% if post.dismiss == True %}
+              <i class="fa fa-check"></i>
+              {% else %}
+              <i class="fa fa-barcode"></i>
+              {% endif %}</td>
+         </tr>
+          {% endfor %}
+       </tbody>
+     </table>
+   </div>
+  <!--//table with registration-->
+{% endblock content %}

@@ -1,0 +1,13 @@
+{% extends 'foundation.html' %}
+
+{% block content %}
+  <div class="row">
+    <div class="small-12 large-6 columns">
+      <form action="" method="post">
+        {% csrf_token %} 
+        {{ form.as_p }}
+        <button type="submit" class="button small">Оруулах</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

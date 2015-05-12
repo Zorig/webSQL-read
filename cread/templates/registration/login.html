@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/foundation.min.css"/>
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/normalize.css"/>
+</head>
+<body>
+  <div class="row"> 
+    <br>
+    
+  </div>
+  
+  <!--main-->
+  <div class="container">
+    <div id="login" class="large-6 small-12 large-centered columns">
+      <div class="row">
+        <form class="form-horizontal" name="LoginForm" action="/" method="post">
+          <div class="row">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            {% if next %}
+                <input type="hidden" name="next" value="{{ next }}" />
+            {% endif %}
+            <div class="control-group">
+              <div class="controls">
+                <input type="text" id="username" name="username"  placeholder="Нэвтрэх нэр"> {{ form.username.errors }}
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="controls">
+                <input type="password" name="password" id="password" placeholder="Нууц үг"> {{ form.password.errors }}
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="controls">
+                <button type="submit" class="button">Login</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--//main-->
+  
+  <!-- JS libs -->
+  <script src="{{ STATIC_URL }}js/vendor/jquery.js"></script>
+  <script src="{{ STATIC_URL }}js/foundation/foundation.js"></script>
+  <script>
+    $(document).foundation();
+  </script>
+</body>
+</html>

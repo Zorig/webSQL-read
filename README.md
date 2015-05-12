@@ -1,2 +1,0 @@
-# webSQL-read
-WebSQL read
