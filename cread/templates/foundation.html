@@ -37,7 +37,7 @@
               </a>
               <ul class="dropdown">
                 <li><a href="#">Нууц үг</a></li>
-                <li><a href="#">Гарах</a></li>
+                <li><a href="{% url 'logout' %}">Гарах</a></li>
               </ul>
             </li>
             {% endif %}
@@ -69,6 +69,8 @@
   <script src="{{ STATIC_URL }}js/foundation/foundation.topbar.js"></script>
   <script>
     $(document).foundation()
+
+
   </script>
 </body>
 </html>

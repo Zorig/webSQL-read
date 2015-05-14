@@ -3,11 +3,205 @@
 {% block content %}
   <div class="row">
     <div class="small-12 large-6 columns">
-      <form action="" method="post">
-        {% csrf_token %} 
+      {% if form.errors %}
+      <p>Зарим талбарыг бөглөөгүй байна</p>
+      {% endif %}
+      <div class="row">
+        <form action="" method="post" id="registerform">
+        {% csrf_token %}
+        {{ form.non_field.errors }}
         {{ form.as_p }}
-        <button type="submit" class="button small">Оруулах</button>
-      </form>
-    </div>
+<!--        <div class="row">-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Сурагчын карт код-->
+              <!--<input type="text" placeholder="Сурагчын карт код" name="student_ID" /> -->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Сурагчын код-->
+              <!--<input type="text" placeholder="Сурагчын код" name="student_school_id" /> {{ form.student_school_id.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Овог-->
+              <!--<input type="text" placeholder="Овог" name="lastname" /> {{ form.lastname.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Нэр-->
+              <!--<input type="text" placeholder="Нэр" name="firstname" /> {{ form.firstname.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Анги-->
+              <!--<input type="text" placeholder="Анги" name="student_class" /> {{ form.student_class.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Багш-->
+              <!--<input type="text" placeholder="Ангийн Багш" name="student_teacher" /> {{ form.student_teacher.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Хүйс-->
+              <!--[><input type="text" placeholder="Хүйс" name="gender" /> {{ form.gender.errors }}<]-->
+              <!--{{ form.gender }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Яс үндэс-->
+              <!--<input type="text" placeholder="Яс үндэс" name="nationality" /> {{ form.nationality.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Ургийн овог-->
+              <!--<input type="text" placeholder="Ургийн овог" name="surname" /> {{ form.surname.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Ам бүл-->
+              <!--<input type="text" placeholder="Ам бүл" name="family" /> {{ form.family.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Өнчин-->
+              <!--<input type="checkbox" name="orphan" /> {{ form.orphan.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Төрсөн өдөр-->
+              <!--<input type="date" placeholder="" name="birthday" /> {{ form.birthday.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Хувийн хэргийн дугаар-->
+              <!--<input type="text" placeholder="Хувийн хэргийн дугаар" name="doc_id" /> {{ form.doc_id.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Регистр-->
+              <!--<input type="text" placeholder="Регистерийн дугаар" name="registration_number" /> {{ form.registration_number.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Төрсний гэрчилгээний дугаар-->
+              <!--<input type="text" placeholder="Төрсний гэрчилгээний дугаар" name="birthday_certificate_id" /> {{ form.birthday_certificate_id.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Имэйл-->
+              <!--<input type="email" placeholder="Имэйл" name="email" /> {{ form.email.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Гар утас-->
+              <!--<input type="number" placeholder="********" name="mobile" /> {{ form.mobile.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Гэрийн утас-->
+              <!--<input type="number" placeholder="********" name="phone" /> {{ form.phone.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Хаяг-->
+              <!--<input type="text" placeholder="Гэрийн хаяг" name="address" /> {{ form.address.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Эцгийн нэр-->
+              <!--<input type="text" placeholder="Эцгийн нэр" name="father_name" /> {{ form.father_name.errors }}-->
+            <!--</label>-->
+          <!--</div>  -->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Эцгийн ажил эрхлэлтийн байдал-->
+              <!--<input type="text" placeholder="Эцгийн ажлын байдал" name="father_status" /> {{ form.father_status.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Эцгийн утасны дугаар-->
+              <!--<input type="number" placeholder="Эцгийн утасны дугаар" name="father_mobile" /> {{ form.father_mobile.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Эхийн нэр-->
+              <!--<input type="text" placeholder="Эхийн нэр" name="mother_name" /> {{ form.mother_name.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Эхийн ажил эрхлэлтийн байдал-->
+              <!--<input type="text" placeholder="Эхийн ажил эрхлэлтийн байдал" name="mother_status" /> {{ form.mother_status.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Эхийн утасны дугаар-->
+              <!--<input type="number" placeholder="Эхийн утасны дугаар" name="mother_mobile" /> {{ form.mother_mobile.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Сургуулийн өмнөх боловсрол-->
+              <!--<input type="text" placeholder="Сургуулийн өмнөх боловсрол аль цэцэрлэгт" name="education_before_school" /> {{ form.education_before_school.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Сургуульд элссэн он-->
+              <!--<input type="date" placeholder="" name="date_school" /> {{ form.date_school.errors }}-->
+            <!--</label>-->
+          <!--</div> -->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Анх элссэн сургууль-->
+              <!--<input type="text" placeholder="Анх элссэн сургууль" name="first_school" /> {{ form.first_school.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Бага боловсрол эзэмшсэн он-->
+              <!--<input type="date" placeholder="бага анги төгссөн он" name="elementary_education_date" /> {{ form.elementary_education_date.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Дунд боловсрол эзэмшсэн он-->
+              <!--<input type="date" placeholder="Дунд анги төгссөн он" name="primary_education_date" /> {{ form.primary_education_date.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Дунд ангийн гэрчилгээний дугаар-->
+              <!--<input type="text" placeholder="Анх элссэн сургууль" name="first_school" /> {{ form.first_school.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Авсан шагнал урамшуулал-->
+              <!--<input type="text" placeholder="Шагнал медаль" name="award" /> {{ form.award.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Сонирхол-->
+              <!--<input type="text" placeholder="Сонирхол хобби" name="interest" /> {{ form.interest.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Нүдний хараа-->
+              <!--<input type="text" placeholder="Нүдний хараа" name="eye_defect" /> {{ form.eye_defect.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Сонсголийн согог-->
+              <!--<input type="text" placeholder="Сонсголийн согог байгаа эсэх" name="hearing_defect" /> {{ form.hearing_defect.errors }}-->
+            <!--</label>-->
+          <!--</div>  -->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Харшил-->
+              <!--<input type="text" placeholder="Харшил" name="allergy" /> {{ form.allergy.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <!--<div class="large-12 columns">-->
+            <!--<label>Архаг өвчин-->
+              <!--<input type="text" placeholder="Архаг өвчин" name="chronic" /> {{ form.chronic.errors }}-->
+            <!--</label>-->
+          <!--</div>-->
+          <button type="submit" class="button small">Оруулах</button>
+        </form>
+      </div>
   </div>
-{% endblock %}
+
+      </div>
+     {% endblock %}

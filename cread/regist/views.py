@@ -2,38 +2,15 @@
 """ Student registration view """
 import datetime
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponse
-from django.core.urlresolvers import reverse
-#from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 from regist.models import RegisterStudent
 from regist.forms import RegisterStudentForm, StudentInfoForm
 # Create your views here.
 
 
-def auth(request):
-    logout(request)
-    username = password = ''
-    if request.POST:
-        username = request.POST['username']
-        password = request.POST['password']
-
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                return HttpResponseRedirect(reverse('regist.views.Register'))
-            else:
-                return HttpResponse(u'Гишүүнчлэл идэвхигүй байна')
-        elif user.is_authenticated == True:
-            return HttpResponseRedirect(reverse('regist.views.Register'))
-        else:
-            return HttpResponse(u'Нууц үг, нэвтрэх нэр буруу байна')
-    return render(request, 'registration/login.html')
-
-
 def Register(request):
-    registered_students = RegisterStudent.objects.all()
+    registered_students = RegisterStudent.objects.all().order_by('-id')
     noon = datetime.time(12, 00, 00)
     a = datetime.datetime.now()
     a = a.time()
@@ -54,6 +31,7 @@ def Register(request):
         'registered_students': registered_students})
 
 
+@login_required
 def reg_student(request):
     if request.method == 'POST':
         form = StudentInfoForm(request.POST)

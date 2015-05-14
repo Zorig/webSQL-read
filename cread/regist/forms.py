@@ -7,7 +7,6 @@ class RegisterStudentForm(forms.ModelForm):
 
     class Meta:
         model = RegisterStudent
-        fields = ['student_id']
 
 
 class StudentInfoForm(forms.ModelForm):
