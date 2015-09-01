@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 # webSQL-read
-WebSQL read
 
-check [dev](https://github.com/Zorig/webSQL-read/tree/dev) branch for full source with back-end code
-=======
 #Сурагч бүртгэл
 
 Эхлээд [python](https://python.org/downloads) суусан байх шаардлагатай. Python сангаа өөрт тохирох ҮС тааруулан татаж авна.
